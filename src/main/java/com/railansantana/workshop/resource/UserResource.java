@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.railansantana.workshop.DTO.UserDTO;
+import com.railansantana.workshop.domain.Post;
 import com.railansantana.workshop.domain.User;
 import com.railansantana.workshop.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,11 +39,11 @@ public class UserResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
-//	@GetMapping(value = "/{id}")
-//	public ResponseEntity<User> findPosts(@PathVariable String id) {
-//		User obj = service.findById(id);
-//		return ResponseEntity.ok().body(obj);
-//	}
+	@GetMapping(value = "/{id}/posts")
+	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
 
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO obj) {
