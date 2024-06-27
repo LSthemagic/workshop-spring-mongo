@@ -1,5 +1,6 @@
 package com.railansantana.workshop.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class PostService {
 			throw new ObjectNotFound("Objeto não encontrado.");
 		}
 		return obj.get();
+	}
+
+	public List<Post> findByTitle(String text){
+		return repository.findByTitleContainingIgnoreCase(text);
 	}
 
 	public void insert(Post obj) {
