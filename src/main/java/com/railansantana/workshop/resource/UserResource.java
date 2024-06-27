@@ -37,6 +37,12 @@ public class UserResource {
 		User obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+//	@GetMapping(value = "/{id}")
+//	public ResponseEntity<User> findPosts(@PathVariable String id) {
+//		User obj = service.findById(id);
+//		return ResponseEntity.ok().body(obj);
+//	}
 
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO obj) {
