@@ -16,6 +16,7 @@ import com.railansantana.workshop.DTO.UserDTO;
 import com.railansantana.workshop.domain.User;
 import com.railansantana.workshop.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -43,6 +44,13 @@ public class UserResource {
 		service.insert(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<User> update(@PathVariable String id, @RequestBody UserDTO entity) {
+		User obj = service.fromDto(entity);
+		obj = service.update(obj, id);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@DeleteMapping(value = "/{id}")
